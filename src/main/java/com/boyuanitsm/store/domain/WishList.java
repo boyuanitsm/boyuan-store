@@ -33,12 +33,23 @@ public class WishList implements Serializable {
     @Column(name = "body")
     private String body;
 
+    @Column(name = "new_new_field")
+    private String newNewField;
+
     @Min(value = 0)
     @Column(name = "new_field")
     private Integer newField;
 
     @ManyToOne
     private User user;
+
+    public String getNewNewField() {
+        return newNewField;
+    }
+
+    public void setNewNewField(String newNewField) {
+        this.newNewField = newNewField;
+    }
 
     public Long getId() {
         return id;
