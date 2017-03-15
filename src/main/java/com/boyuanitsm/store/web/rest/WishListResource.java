@@ -1,5 +1,6 @@
 package com.boyuanitsm.store.web.rest;
 
+import com.boyuanitsm.store.service.UserService;
 import com.codahale.metrics.annotation.Timed;
 import com.boyuanitsm.store.domain.WishList;
 
@@ -33,11 +34,14 @@ public class WishListResource {
     private final Logger log = LoggerFactory.getLogger(WishListResource.class);
 
     private static final String ENTITY_NAME = "wishList";
-        
+
     private final WishListRepository wishListRepository;
 
-    public WishListResource(WishListRepository wishListRepository) {
+    private final UserService userService;
+
+    public WishListResource(WishListRepository wishListRepository, UserService userService) {
         this.wishListRepository = wishListRepository;
+        this.userService = userService;
     }
 
     /**
@@ -94,7 +98,7 @@ public class WishListResource {
     public ResponseEntity<List<WishList>> getAllWishLists(@ApiParam Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of WishLists");
-        Page<WishList> page = wishListRepository.findAll(pageable);
+        Page<WishList> page = wishListRepository.findAllByUser(userService.getUserWithAuthorities(), pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/wish-lists");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
