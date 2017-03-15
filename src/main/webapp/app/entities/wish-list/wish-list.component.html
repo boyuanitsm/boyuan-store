@@ -20,6 +20,7 @@
             <th jhiSortBy="name"><span jhiTranslate="boyuanStoreApp.wishList.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="createDate"><span jhiTranslate="boyuanStoreApp.wishList.createDate">Create Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="body"><span jhiTranslate="boyuanStoreApp.wishList.body">Body</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="newField"><span jhiTranslate="boyuanStoreApp.wishList.newField">New Field</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="user.login"><span jhiTranslate="boyuanStoreApp.wishList.user">User</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -30,6 +31,7 @@
                 <td>{{wishList.name}}</td>
                 <td>{{wishList.createDate | date:'mediumDate'}}</td>
                 <td>{{wishList.body}}</td>
+                <td>{{wishList.newField}}</td>
                 <td>
                     {{wishList.user?.login}}
                 </td>

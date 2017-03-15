@@ -5,6 +5,7 @@ export class WishList {
         public name?: string,
         public createDate?: any,
         public body?: string,
+        public newField?: number,
         public user?: User,
     ) {
     }

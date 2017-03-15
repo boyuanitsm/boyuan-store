@@ -25,6 +25,14 @@
         {
             "fieldName": "body",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "newField",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
         }
     ],
     "changelogDate": "20170315085134",

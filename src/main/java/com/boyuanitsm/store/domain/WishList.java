@@ -33,6 +33,10 @@ public class WishList implements Serializable {
     @Column(name = "body")
     private String body;
 
+    @Min(value = 0)
+    @Column(name = "new_field")
+    private Integer newField;
+
     @ManyToOne
     private User user;
 
@@ -83,6 +87,19 @@ public class WishList implements Serializable {
         this.body = body;
     }
 
+    public Integer getNewField() {
+        return newField;
+    }
+
+    public WishList newField(Integer newField) {
+        this.newField = newField;
+        return this;
+    }
+
+    public void setNewField(Integer newField) {
+        this.newField = newField;
+    }
+
     public User getUser() {
         return user;
     }
@@ -123,6 +140,7 @@ public class WishList implements Serializable {
             ", name='" + name + "'" +
             ", createDate='" + createDate + "'" +
             ", body='" + body + "'" +
+            ", newField='" + newField + "'" +
             '}';
     }
 }
