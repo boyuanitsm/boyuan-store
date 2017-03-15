@@ -76,7 +76,7 @@ local.properties
 ######################
 .gradle/
 /build/
-
+/out/
 ######################
 # Package Files
 ######################
