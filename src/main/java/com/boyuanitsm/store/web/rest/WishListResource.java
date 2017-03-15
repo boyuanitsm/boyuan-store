@@ -1,5 +1,6 @@
 package com.boyuanitsm.store.web.rest;
 
+import com.boyuanitsm.store.security.SecurityUtils;
 import com.boyuanitsm.store.service.UserService;
 import com.codahale.metrics.annotation.Timed;
 import com.boyuanitsm.store.domain.WishList;
@@ -57,6 +58,9 @@ public class WishListResource {
         log.debug("REST request to save WishList : {}", wishList);
         if (wishList.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new wishList cannot already have an ID")).body(null);
+        }
+        if (!SecurityUtils.getCurrentUserLogin().equals(wishList.getUser().getLogin())) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "usererror", "Only select own")).body(null);
         }
         WishList result = wishListRepository.save(wishList);
         return ResponseEntity.created(new URI("/api/wish-lists/" + result.getId()))
