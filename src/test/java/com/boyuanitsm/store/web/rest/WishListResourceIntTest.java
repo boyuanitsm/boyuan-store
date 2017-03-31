@@ -73,7 +73,7 @@ public class WishListResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-            WishListResource wishListResource = new WishListResource(wishListRepository);
+        WishListResource wishListResource = new WishListResource(wishListRepository);
         this.restWishListMockMvc = MockMvcBuilders.standaloneSetup(wishListResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -88,10 +88,10 @@ public class WishListResourceIntTest {
      */
     public static WishList createEntity(EntityManager em) {
         WishList wishList = new WishList()
-                .name(DEFAULT_NAME)
-                .createDate(DEFAULT_CREATE_DATE)
-                .body(DEFAULT_BODY)
-                .newField(DEFAULT_NEW_FIELD);
+            .name(DEFAULT_NAME)
+            .createDate(DEFAULT_CREATE_DATE)
+            .body(DEFAULT_BODY)
+            .newField(DEFAULT_NEW_FIELD);
         return wishList;
     }
 
@@ -106,7 +106,6 @@ public class WishListResourceIntTest {
         int databaseSizeBeforeCreate = wishListRepository.findAll().size();
 
         // Create the WishList
-
         restWishListMockMvc.perform(post("/api/wish-lists")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(wishList)))
@@ -128,13 +127,12 @@ public class WishListResourceIntTest {
         int databaseSizeBeforeCreate = wishListRepository.findAll().size();
 
         // Create the WishList with an existing ID
-        WishList existingWishList = new WishList();
-        existingWishList.setId(1L);
+        wishList.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restWishListMockMvc.perform(post("/api/wish-lists")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(existingWishList)))
+            .content(TestUtil.convertObjectToJsonBytes(wishList)))
             .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
@@ -212,10 +210,10 @@ public class WishListResourceIntTest {
         // Update the wishList
         WishList updatedWishList = wishListRepository.findOne(wishList.getId());
         updatedWishList
-                .name(UPDATED_NAME)
-                .createDate(UPDATED_CREATE_DATE)
-                .body(UPDATED_BODY)
-                .newField(UPDATED_NEW_FIELD);
+            .name(UPDATED_NAME)
+            .createDate(UPDATED_CREATE_DATE)
+            .body(UPDATED_BODY)
+            .newField(UPDATED_NEW_FIELD);
 
         restWishListMockMvc.perform(put("/api/wish-lists")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -268,6 +266,7 @@ public class WishListResourceIntTest {
     }
 
     @Test
+    @Transactional
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(WishList.class);
     }

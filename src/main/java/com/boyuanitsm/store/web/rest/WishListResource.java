@@ -87,12 +87,10 @@ public class WishListResource {
      *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of wishLists in body
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
     @GetMapping("/wish-lists")
     @Timed
-    public ResponseEntity<List<WishList>> getAllWishLists(@ApiParam Pageable pageable)
-        throws URISyntaxException {
+    public ResponseEntity<List<WishList>> getAllWishLists(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of WishLists");
         Page<WishList> page = wishListRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/wish-lists");
