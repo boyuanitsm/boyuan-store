@@ -34,7 +34,7 @@ export class JhiTrackerService {
         if (this.connectedPromise === null) {
           this.connection = this.createConnection();
         }
-        // building absolute path so that websocket doesnt fail when deploying with a context path
+        // building absolute path so that websocket doesn't fail when deploying with a context path
         const loc = this.$window.location;
         let url = '//' + loc.host + loc.pathname + 'websocket/tracker';
         const authToken = this.authServerProvider.getToken();

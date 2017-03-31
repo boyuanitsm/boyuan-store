@@ -9,6 +9,7 @@ import { WishList } from './wish-list.model';
 import { WishListPopupService } from './wish-list-popup.service';
 import { WishListService } from './wish-list.service';
 import { User, UserService } from '../../shared';
+
 @Component({
     selector: 'jhi-wish-list-dialog',
     templateUrl: './wish-list-dialog.component.html'
@@ -45,10 +46,12 @@ export class WishListDialogComponent implements OnInit {
         this.isSaving = true;
         if (this.wishList.id !== undefined) {
             this.wishListService.update(this.wishList)
-                .subscribe((res: WishList) => this.onSaveSuccess(res), (res: Response) => this.onSaveError(res.json()));
+                .subscribe((res: WishList) =>
+                    this.onSaveSuccess(res), (res: Response) => this.onSaveError(res.json()));
         } else {
             this.wishListService.create(this.wishList)
-                .subscribe((res: WishList) => this.onSaveSuccess(res), (res: Response) => this.onSaveError(res.json()));
+                .subscribe((res: WishList) =>
+                    this.onSaveSuccess(res), (res: Response) => this.onSaveError(res.json()));
         }
     }
 
